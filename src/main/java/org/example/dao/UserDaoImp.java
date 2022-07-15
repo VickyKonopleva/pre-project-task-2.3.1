@@ -21,11 +21,7 @@ public class UserDaoImp implements UserDao{
     @Transactional
     @Override
     public void saveUser(User user) {
-        String qlString = "insert into User (name,surname) values (?,?)";
-        Query query = em.createNativeQuery(qlString);
-        query.setParameter(1, user.getName());
-        query.setParameter(2, user.getSurname());
-        query.executeUpdate();
+        em.persist(user);
     }
     @Transactional(readOnly = true)
     @Override
@@ -36,24 +32,17 @@ public class UserDaoImp implements UserDao{
     @Transactional
     @Override
     public void delete(int id) {
-        String qlString = "delete from User where id=?";
-        Query query = em.createNativeQuery(qlString);
-        query.setParameter(1, id);
-        query.executeUpdate();
+        em.remove(show(id));
     }
 
     @Transactional
     @Override
     public void updateUser(int id, User user) {
-        String query= "update User set name = ? and surname = ? where id = ?";
-        Query nativeQuery = em.createNativeQuery(query);
-        nativeQuery.setParameter(1, user.getName());
-        nativeQuery.setParameter(2, user.getSurname());
-        nativeQuery.setParameter(3, user.getId());
-        nativeQuery.executeUpdate();
+        User updatedUser;
+        updatedUser = show(id);
+        em.detach(updatedUser);
+        updatedUser.setName(user.getName());
+        updatedUser.setSurname(user.getSurname());
+        em.merge(updatedUser);
     }
-
-
-
-
 }

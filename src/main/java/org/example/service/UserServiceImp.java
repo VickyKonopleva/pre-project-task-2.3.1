@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.example.dao.UserDao;
 import org.example.dao.UserDaoImp;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService{
-
+    @Autowired
     UserDao userDao = new UserDaoImp();
     @Override
     public void update(int id, User user) {
