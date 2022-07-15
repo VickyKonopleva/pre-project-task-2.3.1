@@ -1,4 +1,4 @@
-package web.config;
+package org.example.config;
 
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
+@ComponentScan(basePackages = "org.example")
+@EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource("classpath:hibernate.properties")
 public class WebConfig implements WebMvcConfigurer {
     private final Environment env;
@@ -43,14 +44,14 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
+        LocalContainerEntityManagerFactoryBean emf
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("web");
+        emf.setDataSource(dataSource());
+        emf.setPackagesToScan("org.example");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
-        return em;
+        emf.setJpaVendorAdapter(vendorAdapter);
+        emf.setJpaProperties(additionalProperties());
+        return emf;
     }
     @Bean
     public DataSource dataSource(){

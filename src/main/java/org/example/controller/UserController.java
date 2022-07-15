@@ -1,12 +1,12 @@
-package web.controller;
+package org.example.controller;
 
 
+import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.model.User;
-import web.service.UserService;
+import org.example.model.User;
 
 @Controller
 @RequestMapping("/users")

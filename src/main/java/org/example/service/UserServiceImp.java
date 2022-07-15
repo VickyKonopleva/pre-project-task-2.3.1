@@ -1,16 +1,16 @@
-package web.service;
+package org.example.service;
 
 import org.springframework.stereotype.Service;
-import web.dao.UserDao;
-import web.dao.UserDaoImp;
-import web.model.User;
+import org.example.dao.UserDao;
+import org.example.dao.UserDaoImp;
+import org.example.model.User;
 
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService{
-    UserDao userDao = new UserDaoImp();
 
+    UserDao userDao = new UserDaoImp();
     @Override
     public void update(int id, User user) {
         userDao.updateUser(id, user);

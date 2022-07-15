@@ -1,7 +1,7 @@
-package web.model;
+package org.example.model;
 
-import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="user")
