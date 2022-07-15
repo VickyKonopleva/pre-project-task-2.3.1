@@ -14,7 +14,7 @@ public class UserDaoImp implements UserDao{
 
     @Transactional(readOnly = true)
     public List<User>  getAllUsers() {
-        TypedQuery<User> typedQuery = em.createQuery("Select User from User", User.class);
+        TypedQuery<User> typedQuery = em.createQuery("select a from User a", User.class);
         return  typedQuery.getResultList();
     }
 
