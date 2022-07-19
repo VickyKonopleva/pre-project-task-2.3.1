@@ -8,7 +8,7 @@ public interface UserService {
 //    void createUsersTable();
 //
 //    void dropUsersTable();
-    void update(int id, User user);
+    void update(User user);
     void saveUser(User user);
     User show(int id);
 

@@ -38,10 +38,10 @@ public class UserController {
         model.addAttribute("user", userService.show(id));
         return "/edit";
     }
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
                          @PathVariable("id") int id) {
-        userService.update(id, user);
+        userService.update(user);
         return "redirect:/users";
     }
 

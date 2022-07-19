@@ -14,8 +14,7 @@ public class UserDaoImp implements UserDao{
 
     @Transactional(readOnly = true)
     public List<User>  getAllUsers() {
-        TypedQuery<User> typedQuery = em.createQuery("select a from User a", User.class);
-        return  typedQuery.getResultList();
+        return  em.createQuery("select a from User a", User.class).getResultList();
     }
 
     @Transactional
@@ -32,17 +31,14 @@ public class UserDaoImp implements UserDao{
     @Transactional
     @Override
     public void delete(int id) {
-        em.remove(show(id));
+        em.createQuery("delete from User where id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Transactional
     @Override
-    public void updateUser(int id, User user) {
-        User updatedUser;
-        updatedUser = show(id);
-        em.detach(updatedUser);
-        updatedUser.setName(user.getName());
-        updatedUser.setSurname(user.getSurname());
-        em.merge(updatedUser);
+    public void updateUser(User user) {
+        em.merge(user);
     }
 }
